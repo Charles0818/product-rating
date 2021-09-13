@@ -1,0 +1,17 @@
+CREATE TABLE IF NOT EXISTS 
+  products (
+      id BIGSERIAL NOT NULL PRIMARY KEY,
+      name VARCHAR(128) NOT NULL,
+      price DOUBLE PRECISION NOT NULL,
+      created_at TIMESTAMP NOT NULL DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS 
+  product_ratings (
+      id BIGSERIAL NOT NULL PRIMARY KEY,
+      rating int NOT NULL,
+      text TEXT DEFAULT NULL,
+      product_id BIGSERIAL NOT NULL,
+      created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+      FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
+);
